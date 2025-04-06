@@ -1,18 +1,35 @@
 <?php
-//require_once "../helpers.php";
+require_once "../helpers.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
+    foreach($_POST as $post => $value){
+        if (empty($value)){
+            echo "Вы заполнили не все поля";
+            exit;
+        }
+    };
 
-    $formData = [
-        'Title'             => $_POST['Title']    ?? '',
-        'Ingredients'       => $_POST['Ingredients']   ?? '',
-        'RecipeDescription' => $_POST['RecipeDescription'] ?? '',
-        'Steps'             => $_POST['steps'] ?? '',
-        'SimpleSelect'      => $_POST['simpleSelect'] ?? '',
-        'MultipleSelect'    => $_POST['multipleSelect'] ?? ''
+    foreach($_POST as $post => $value){
+        if (strlen($value) < 3){
+            echo "Недостаточно символов";
+            exit;
+        }
+        elseif (strlen($value) > 100){
+            echo "Слишком много символов";
+            exit;
+        }
+        else continue;
+    };
 
-    ];
+    $formData = [];
+    foreach($_POST as $post => $value){
+        $formData[$post]=htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    };
+    
+
+
+   
     print_r($formData['Ingredients']);
     file_put_contents('../storage/recipes.txt', json_encode($formData) . PHP_EOL, FILE_APPEND);
     $steps = $_POST['steps'];
