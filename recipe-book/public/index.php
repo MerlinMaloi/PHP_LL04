@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <?php require_once "../src/handlers/handler.php";
     
-    
     ?>
 </head>
 
@@ -18,7 +17,7 @@ autocomplete="off"
 method="POST"
 id="NewRecept">
 
-    <input type="text" name="Title" text="Как называется ваш рецепт?" required><br>
+    <input type="text" name="Title" text="Как называется ваш рецепт?" required></input><br>
     <select name="simpleSelect">
         <option value="japan">Восточная</option>
         <option value="frans">Французская</option>
@@ -87,9 +86,7 @@ document.getElementById("AddStep").addEventListener("click", function() {
 }
 
 
-
-
-        let buttonCreate = document.getElementById("AddStep")
+        let buttonCreate = document.getElementById("AddStep");
         buttonCreate.addEventListener("click", AddStep)
     </script>
 
